@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+<meta charset='UTF-8'>
+<meta name="robots" content="noindex">
+<style>
+
+
+</style>
+</head>
+<body>
+
+<div  id="pageBox"></div>
+
+<script src='vue.js'></script>
+<script src='vuePager.min.js'></script>
+<!--<script src='vuePager.dev.js'></script>-->
+<script>
+/*
+
+
+*/
+new vuePaging("#pageBox",{
+	pn:1,//第一页,[必],int,默认：第1页
+	offset:5,//显示页码数5个,[必],int,默认：5个,注：此处最好是奇数
+	tp:100,//总页数,[必],int,默认：共100页
+	pinf:true,//是否显示分页信息,[选],bool,默认true显示
+	firstText:"首页",//首页显示文字,[选],string,默认：« ,注：假值为不显示，不设置则使用默认值
+	preText:"上页",//上页显示文字,[选],string,默认：› ,注：假值为不显示，不设置为则用默认值
+	posText:"下页",//下页显示文字,[选],string,默认：‹ ,注：假值为不显示，不设置为则用默认值
+	lastText:"末页",//尾页显示文字,[选],string,默认：« ,注：假值为不显示，不设置为则用默认值
+}).build(function(pn, tp, offset){
+		console.log(pn, tp, offset);
+});
+
+</script>
+</body>
+
+</html>
