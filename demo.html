@@ -1,29 +1,63 @@
 <!DOCTYPE html>
-<html lang='en' class=''>
+<html lang="zh">
 <head>
-<meta charset='UTF-8'>
-<meta name="robots" content="noindex">
-<style>
+<meta charset="utf-8">
+<title>vuePager分页</title>
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style type="text/css">
+body{margin:10px 0;}
+ul{margin:0; padding:0; list-style-type:none;}
 
-
+.bgc{background-color:rgba(241, 190, 197, 0.2);}
 </style>
 </head>
 <body>
 
-<div  id="pageBox"></div>
+<div id="tby" class="container">
 
-<script src='vue.js'></script>
+	<div class="card-body text-center">
+		<h5 class="card-title"> VuePager使用示例</h5>
+		<p class="card-text">Build By: Vue2.6.10 + VuePager1.1 , tested by chy 20190726</p>
+	</div>
+
+	<section>
+		<ul class="list-group">
+			<li v-bind:class="{bgc:i%2==0}" class="list-group-item" v-for="i in show">第 <mark>{{pn}}</mark> - <mark>{{i}}</mark> 条数据</li>
+		</ul>
+	</section>
+	<br/>
+	<nav>
+		<div id="pageBox"></div>
+	</nav>
+
+	
+</div>
+
+<script src='https://unpkg.com/vue@2.6.10/dist/vue.js'></script>
 <script src='vuePager.min.js'></script>
-<!--<script src='vuePager.dev.js'></script>-->
 <script>
-/*
+var v1=new Vue({
+	el:"#tby",
+	data:{
+		pn:1,//当前页码数
+		tt:500,//总条数
+		show:7,//页显示条数
+	},
+	computed:{
+		tp:function(){
+			return Math.ceil(this.tt/this.show);
+		}
+	}
+	
+	
+})
 
 
-*/
-new vuePaging("#pageBox",{
-	pn:1,//第一页,[必],int,默认：第1页
-	offset:5,//显示页码数5个,[必],int,默认：5个,注：此处最好是奇数
-	tp:100,//总页数,[必],int,默认：共100页
+new vuePager("#pageBox",{
+	pn:v1.pn,//页码,[必],int,默认：第1页
+	tp:v1.tp,//总页数,[必],int,默认：共100页
+	offset:5,//显示页码个数,[选],int,默认5,注：此处最好是奇数
 	pinf:true,//是否显示分页信息,[选],bool,默认true显示
 	firstText:"首页",//首页显示文字,[选],string,默认：« ,注：假值为不显示，不设置则使用默认值
 	preText:"上页",//上页显示文字,[选],string,默认：› ,注：假值为不显示，不设置为则用默认值
@@ -31,9 +65,14 @@ new vuePaging("#pageBox",{
 	lastText:"末页",//尾页显示文字,[选],string,默认：« ,注：假值为不显示，不设置为则用默认值
 }).build(function(pn, tp, offset){
 		console.log(pn, tp, offset);
+		v1.pn=pn;
 });
+
+
+//new 
+
+
 
 </script>
 </body>
-
 </html>
